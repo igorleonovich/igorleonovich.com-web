@@ -1,20 +1,28 @@
 version: '3.6'
 
 services:
-  igorleonovich:
-    image: nginx
+  www.igorleonovich.com:
+      image: nginx
+      restart: always
+      volumes:
+        - "./:/usr/share/nginx/html"
+      environment:
+        - VIRTUAL_HOST=www.igorleonovich.com
+        - VIRTUAL_PORT=80
+        - LETSENCRYPT_HOST=www.igorleonovich.com
+        - LETSENCRYPT_EMAIL=mail@igorleonovich.com
+
+  # redirect omicstudio.com to www.omicstudio.com
+  igorleonovich.com:
+    image: cusspvz/redirect
     restart: always
-    volumes:
-      - "./:/usr/share/nginx/html"
     environment:
-      # NGINX-PROXY ENVIRONMENT VARIABLES: UPDATE ME
-      - VIRTUAL_HOST=igorleonovich.com 
+      - VIRTUAL_HOST=igorleonovich.com
       - VIRTUAL_PORT=80
-      - LETSENCRYPT_HOST=igorleonovich.com 
-      - LETSENCRYPT_EMAIL=mail@igorleonovich.com
-      # /END NGINX-PROXY ENVIRONMENT VARIABLES
-    expose:
-      - 80
+      - HTTPS_METHOD=noredirect
+      - LETSENCRYPT_HOST=igorleonovich.com
+      - REDIRECT=https://www.igorleonovich.com
+      - WORKER_CONNECTIONS=1024
 
 networks:
   default:
