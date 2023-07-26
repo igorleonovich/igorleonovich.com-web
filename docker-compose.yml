@@ -12,7 +12,6 @@ services:
         - LETSENCRYPT_HOST=www.igorleonovich.com
         - LETSENCRYPT_EMAIL=mail@igorleonovich.com
 
-  # redirect omicstudio.com to www.omicstudio.com
   igorleonovich.com:
     image: cusspvz/redirect
     restart: always
