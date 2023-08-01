@@ -2,8 +2,8 @@
 <html lang="en-US">
 	<head>
 		<!-- Required meta tags -->
-	  <meta charset="utf-8" />
-	  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
 		<!-- CSS -->
 		<link rel="stylesheet" href="styles/style.css" />
@@ -11,43 +11,43 @@
 	</head>
 	<body>
 		<script type="text/javascript" src="js/font-loader.js"></script>
-	  <script type="text/javascript">
+		<script type="text/javascript">
 
-				function fontsLoadedCallback() {
-					document.getElementById("center-block").style.visibility = "visible";
+			function fontsLoadedCallback() {
+				document.getElementById("center-block").style.visibility = "visible";
+			}
+
+			var fontLoader = new FontLoader(["San Francisco Display Ultralight"], {
+				"fontLoaded": function(font) {
+					// One of the fonts was loaded
+					console.log("font loaded: " + font.family);
+				},
+				"complete": function(error) {
+					if (error !== null) {
+						// Reached the timeout but not all fonts were loaded
+						console.log(error.message);
+						console.log(error.notLoadedFonts);
+					} else {
+						// All fonts were loaded
+						console.log("all fonts were loaded");
+						fontsLoadedCallback();
+					}
 				}
-
-	      var fontLoader = new FontLoader(["San Francisco Display Ultralight"], {
-	          "fontLoaded": function(font) {
-	              // One of the fonts was loaded
-	              console.log("font loaded: " + font.family);
-	          },
-	          "complete": function(error) {
-	              if (error !== null) {
-	                  // Reached the timeout but not all fonts were loaded
-	                  console.log(error.message);
-	                  console.log(error.notLoadedFonts);
-	              } else {
-	                  // All fonts were loaded
-	                  console.log("all fonts were loaded");
-										fontsLoadedCallback();
-	              }
-	          }
-	      }, 3000);
-	      fontLoader.loadFonts();
-	  	</script>
-			<header>
-			</header>
-			<main>
-				<section id="center-block">
-					<a href="/CV_iOS_Developer_(Igor_Leonovich).pdf">CV</a>
-					<a href="https://github.com/igorleonovich">GitHub</a>
-					<a href="https://soundcloud.com/lyanchmusic">SoundCloud</a>
-					<a href="https://instagram.com/igor.leonovich">Instagram</a>
-					<a href="https://twitter.com/i_leonovich">Twitter</a>
-				<section>
-			</main>
-			<footer>
-			</footer>
+			}, 3000);
+			fontLoader.loadFonts();
+	  </script>
+		<header>
+		</header>
+		<main>
+			<section id="center-block">
+				<a href="/CV_iOS_Developer_(Igor_Leonovich).pdf">CV</a>
+				<a href="https://github.com/igorleonovich">GitHub</a>
+				<a href="https://soundcloud.com/lyanchmusic">SoundCloud</a>
+				<a href="https://instagram.com/igor.leonovich">Instagram</a>
+				<a href="https://twitter.com/i_leonovich">Twitter</a>
+			<section>
+		</main>
+		<footer>
+		</footer>
 	</body>
 </html>
