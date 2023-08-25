@@ -1,31 +1,33 @@
 version: '3.6'
 
 services:
-  www.igorleonovich.com:
+  www:
       image: nginx
+      container_name: www.${DESTINATION_HOSTNAME}
       restart: always
       volumes:
-        - "./:/usr/share/nginx/html"
+        - "./html/:/usr/share/nginx/html"
       environment:
-        - VIRTUAL_HOST=www.igorleonovich.com
-        - VIRTUAL_PORT=80
-        - LETSENCRYPT_HOST=www.igorleonovich.com
-        - LETSENCRYPT_EMAIL=mail@igorleonovich.com
+        - VIRTUAL_HOST=www.${DESTINATION_HOSTNAME}
+        - VIRTUAL_PORT=${PORT}
+        - LETSENCRYPT_HOST=www.${DESTINATION_HOSTNAME}
+        - LETSENCRYPT_EMAIL=mail@${DESTINATION_HOSTNAME}
 
-  igorleonovich.com:
+  non-www:
+    container_name: ${DESTINATION_HOSTNAME}
     image: redirect:latest
     restart: always
     build:
-      context: .
+      context: ./redirect-docker
     environment:
-      - VIRTUAL_HOST=igorleonovich.com
-      - VIRTUAL_PORT=80
+      - VIRTUAL_HOST=${DESTINATION_HOSTNAME}
+      - VIRTUAL_PORT=${PORT}
       - HTTPS_METHOD=noredirect
-      - LETSENCRYPT_HOST=igorleonovich.com
-      - REDIRECT=https://www.igorleonovich.com
+      - LETSENCRYPT_HOST=${DESTINATION_HOSTNAME}
+      - REDIRECT=https://www.${DESTINATION_HOSTNAME}
       - WORKER_CONNECTIONS=1024
 
 networks:
   default:
-    external:
       name: nginx-proxy
+      external: true
