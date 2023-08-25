@@ -1,0 +1,4 @@
+[submodule "redirect-docker"]
+	path = redirect-docker
+	url = ssh://git@github.com:igorleonovich/cusspvz/redirect.docker.git
+	branch = master
