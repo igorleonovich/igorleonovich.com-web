@@ -13,8 +13,10 @@ services:
         - LETSENCRYPT_EMAIL=mail@igorleonovich.com
 
   igorleonovich.com:
-    image: cusspvz/redirect
+    image: redirect:latest
     restart: always
+    build:
+      context: .
     environment:
       - VIRTUAL_HOST=igorleonovich.com
       - VIRTUAL_PORT=80
